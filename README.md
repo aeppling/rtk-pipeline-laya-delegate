@@ -1,11 +1,11 @@
-# rtk pipeline · laya-delegate-v12
+# rtk pipeline · laya-delegate
 
 Numbers on this card are self-reported by the author's own rtk. rtk verifies nothing.
 
 ## Install
 
 ```
-rtk pipeline add github:aeppling/rtk-pipeline-laya-delegate-v12
+rtk pipeline add github:aeppling/rtk-pipeline-laya-delegate
 ```
 
 rtk shows this pipeline's rules and asks before anything installs, and pins the install to a commit. A pipeline can rewrite the commands your agent runs, filter and replace what it reads, and send content to any upstream it declares — review the rules and install only what you trust. RTK does not review or endorse shared pipelines; the author is responsible for this repo, and you are responsible for what you install.
@@ -27,7 +27,7 @@ _No recorded activity yet — run some sessions with this pipeline active, then 
 ## user pipeline.toml
 
 ```toml
-# laya-delegate-v12 — RTK filtering + Laya-routed delegation to a Haiku sub-agent.
+# laya-delegate — RTK filtering + Laya-routed delegation to a Haiku sub-agent.
 #
 # PREREQUISITE: Laya running locally. This pipeline's routing decisions come
 # from Laya (@receptron/laya, a small local classifier; Node 20+, ~1.7 GB model
@@ -70,7 +70,7 @@ _No recorded activity yet — run some sessions with this pipeline active, then 
 schema_version = 1
 
 [pipeline]
-name    = "laya-delegate-v12"
+name    = "laya-delegate"
 extends = ["rtk:posthook", "rtk:delegate-reads"]
 
 [upstream.judge]
@@ -164,7 +164,5 @@ task    = "bulk-read"
 mode    = "suggest"
 message = "Do not run this search or open these files yourself: hand the investigation to the Explore sub-agent (Agent tool: subagent_type \"Explore\", model \"haiku\") with one precise question, and ask it for file paths, line numbers and the exact lines you will need. Then work from its report."
 ```
-
-Measured by [rtk](https://github.com/rtk-ai/rtk) v0.49.0 on 2026-10-19.
 
 Install this pipeline: `rtk pipeline add <url-of-this-card>`
