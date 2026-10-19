@@ -1,49 +1,97 @@
-task	arm	trial	cost_usd	reward	subagent_calls
-parallel-tfidf-search	OFF	AUfenUF	1.3525	1.0	0
-parallel-tfidf-search	OFF	AqfLxEW	1.6809	1.0	0
-parallel-tfidf-search	OFF	wBMjqji	0.7949	1.0	0
-parallel-tfidf-search	OFF	yDVJKiE	1.2132	1.0	0
-parallel-tfidf-search	v12	8LjqDiX	1.2654	1.0	1
-parallel-tfidf-search	v12	HqkapCk	0.9962	1.0	1
-parallel-tfidf-search	v12	MmAiZvz	1.1279	1.0	1
-parallel-tfidf-search	v12	VG9m7Q9	0.6380	1.0	1
-fix-visual-stability	OFF	7B23jTc	0.5276	0.0	0
-fix-visual-stability	OFF	TZG5iJq	0.4600	0.0	0
-fix-visual-stability	OFF	XQ5MB4t	0.6058	1.0	0
-fix-visual-stability	OFF	tRWFq8S	0.5432	0.0	0
-fix-visual-stability	v12	4JtizZZ	0.5032	0.0	1
-fix-visual-stability	v12	RLbrcLn	0.3613	0.0	1
-fix-visual-stability	v12	jqV2kN2	0.4922	1.0	0
-fix-visual-stability	v12	xbgQJXm	0.4460	1.0	1
-debug-trl-grpo	OFF	5GU6WCi	0.0916	0.6	0
-debug-trl-grpo	OFF	EpURuYP	0.1475	0.6	0
-debug-trl-grpo	OFF	sujruAC	0.0880	0.6	0
-debug-trl-grpo	OFF	v5ELH26	0.1549	0.6	0
-debug-trl-grpo	v12	2Rm6BCy	0.1092	0.6	0
-debug-trl-grpo	v12	2x4op8K	0.0873	0.6	0
-debug-trl-grpo	v12	wGyEqQG	0.4400	0.6	0
-debug-trl-grpo	v12	zBtQvim	0.3230	0.6	0
-fix-build-google-auto	OFF	P6XvjM3	0.3091	1.0	0
-fix-build-google-auto	OFF	V6WjNmu	0.2815	1.0	0
-fix-build-google-auto	OFF	ejyudAd	0.3635	1.0	0
-fix-build-google-auto	OFF	gR5LiR6	0.3056	1.0	0
-fix-build-google-auto	v12	8BPrb5z	0.3258	1.0	0
-fix-build-google-auto	v12	BL4soaN	0.4892	1.0	1
-fix-build-google-auto	v12	UYFJZaD	0.2347	1.0	1
-fix-build-google-auto	v12	zmgKq5N	0.2680	1.0	0
-fix-erlang-ssh-cve	OFF	TwVLXvz	0.1785	1.0	0
-fix-erlang-ssh-cve	OFF	WPnFg3N	0.2229	1.0	0
-fix-erlang-ssh-cve	OFF	gD57FuC	0.1961	1.0	0
-fix-erlang-ssh-cve	OFF	qVxcEUD	0.1543	1.0	0
-fix-erlang-ssh-cve	v12	Qoj5EZ8	0.1622	1.0	0
-fix-erlang-ssh-cve	v12	RPpUJpY	0.2251	1.0	0
-fix-erlang-ssh-cve	v12	ue8LFnd	0.2382	1.0	0
-fix-erlang-ssh-cve	v12	vEPAJFZ	0.1700	1.0	0
-python-scala-translation	OFF	2pGUEnk	0.7553	1.0	0
-python-scala-translation	OFF	jkuLmKb	0.9408	1.0	0
-python-scala-translation	OFF	uveHJUU	1.0726	1.0	0
-python-scala-translation	OFF	xXAVuoB	1.0270	1.0	0
-python-scala-translation	v12	FQRzaf5	0.9898	1.0	1
-python-scala-translation	v12	S8Z9B7G	1.0349	1.0	2
-python-scala-translation	v12	a3MM6Wk	0.9492	1.0	2
-python-scala-translation	v12	pQhyX4X	0.5665	1.0	1
+date	task	arm	trial	cost_usd	reward	rtk_refusals	subagent_calls	rtk_tokens_saved
+2026-10-18	parallel-tfidf-search	OFF	AUfenUF	1.3525	1.0	0	0	0
+2026-10-18	parallel-tfidf-search	OFF	AqfLxEW	1.6809	1.0	0	0	0
+2026-10-18	parallel-tfidf-search	OFF	wBMjqji	0.7949	1.0	0	0	0
+2026-10-18	parallel-tfidf-search	OFF	yDVJKiE	1.2132	1.0	0	0	0
+2026-10-18	parallel-tfidf-search	laya-delegate	8LjqDiX	1.2654	1.0	1	1	776
+2026-10-18	parallel-tfidf-search	laya-delegate	HqkapCk	0.9962	1.0	1	1	216
+2026-10-18	parallel-tfidf-search	laya-delegate	MmAiZvz	1.1279	1.0	1	1	196
+2026-10-18	parallel-tfidf-search	laya-delegate	VG9m7Q9	0.6380	1.0	1	1	255
+2026-10-18	fix-visual-stability	OFF	7B23jTc	0.5276	0.0	0	0	0
+2026-10-18	fix-visual-stability	OFF	TZG5iJq	0.4600	0.0	0	0	0
+2026-10-18	fix-visual-stability	OFF	XQ5MB4t	0.6058	1.0	0	0	0
+2026-10-18	fix-visual-stability	OFF	tRWFq8S	0.5432	0.0	0	0	0
+2026-10-18	fix-visual-stability	laya-delegate	4JtizZZ	0.5032	0.0	4	1	26
+2026-10-18	fix-visual-stability	laya-delegate	RLbrcLn	0.3613	0.0	1	1	725
+2026-10-18	fix-visual-stability	laya-delegate	jqV2kN2	0.4922	1.0	0	0	525
+2026-10-18	fix-visual-stability	laya-delegate	xbgQJXm	0.4460	1.0	1	1	323
+2026-10-18	debug-trl-grpo	OFF	5GU6WCi	0.0916	0.6	0	0	0
+2026-10-18	debug-trl-grpo	OFF	EpURuYP	0.1475	0.6	0	0	0
+2026-10-18	debug-trl-grpo	OFF	sujruAC	0.0880	0.6	0	0	0
+2026-10-18	debug-trl-grpo	OFF	v5ELH26	0.1549	0.6	0	0	0
+2026-10-18	debug-trl-grpo	laya-delegate	2Rm6BCy	0.1092	0.6	0	0	141
+2026-10-18	debug-trl-grpo	laya-delegate	2x4op8K	0.0873	0.6	0	0	168
+2026-10-18	debug-trl-grpo	laya-delegate	wGyEqQG	0.4400	0.6	0	0	2100
+2026-10-18	debug-trl-grpo	laya-delegate	zBtQvim	0.3230	0.6	0	0	1600
+2026-10-18	fix-build-google-auto	OFF	P6XvjM3	0.3091	1.0	0	0	0
+2026-10-18	fix-build-google-auto	OFF	V6WjNmu	0.2815	1.0	0	0	0
+2026-10-18	fix-build-google-auto	OFF	ejyudAd	0.3635	1.0	0	0	0
+2026-10-18	fix-build-google-auto	OFF	gR5LiR6	0.3056	1.0	0	0	0
+2026-10-18	fix-build-google-auto	laya-delegate	8BPrb5z	0.3258	1.0	1	0	620
+2026-10-18	fix-build-google-auto	laya-delegate	BL4soaN	0.4892	1.0	1	1	3300
+2026-10-18	fix-build-google-auto	laya-delegate	UYFJZaD	0.2347	1.0	1	1	1900
+2026-10-18	fix-build-google-auto	laya-delegate	zmgKq5N	0.2680	1.0	1	0	959
+2026-10-18	fix-erlang-ssh-cve	OFF	TwVLXvz	0.1785	1.0	0	0	0
+2026-10-18	fix-erlang-ssh-cve	OFF	WPnFg3N	0.2229	1.0	0	0	0
+2026-10-18	fix-erlang-ssh-cve	OFF	gD57FuC	0.1961	1.0	0	0	0
+2026-10-18	fix-erlang-ssh-cve	OFF	qVxcEUD	0.1543	1.0	0	0	0
+2026-10-18	fix-erlang-ssh-cve	laya-delegate	Qoj5EZ8	0.1622	1.0	0	0	387
+2026-10-18	fix-erlang-ssh-cve	laya-delegate	RPpUJpY	0.2251	1.0	0	0	792
+2026-10-18	fix-erlang-ssh-cve	laya-delegate	ue8LFnd	0.2382	1.0	0	0	917
+2026-10-18	fix-erlang-ssh-cve	laya-delegate	vEPAJFZ	0.1700	1.0	0	0	8
+2026-10-18	python-scala-translation	OFF	2pGUEnk	0.7553	1.0	0	0	0
+2026-10-18	python-scala-translation	OFF	jkuLmKb	0.9408	1.0	0	0	0
+2026-10-18	python-scala-translation	OFF	uveHJUU	1.0726	1.0	0	0	0
+2026-10-18	python-scala-translation	OFF	xXAVuoB	1.0270	1.0	0	0	0
+2026-10-18	python-scala-translation	laya-delegate	FQRzaf5	0.9898	1.0	1	1	60
+2026-10-18	python-scala-translation	laya-delegate	S8Z9B7G	1.0349	1.0	1	2	5400
+2026-10-18	python-scala-translation	laya-delegate	a3MM6Wk	0.9492	1.0	1	2	355
+2026-10-18	python-scala-translation	laya-delegate	pQhyX4X	0.5665	1.0	1	1	4100
+2026-10-19	parallel-tfidf-search	OFF	CdVQuRS	1.3529	1.0	0	0	0
+2026-10-19	parallel-tfidf-search	OFF	GfLQ9gJ	2.2013	1.0	0	0	0
+2026-10-19	parallel-tfidf-search	OFF	ZKTshUv	0.6971	1.0	0	0	0
+2026-10-19	parallel-tfidf-search	OFF	jQjBypL	1.4633	1.0	0	0	0
+2026-10-19	parallel-tfidf-search	laya-delegate	H4pPLuU	1.2251	1.0	1	1	213
+2026-10-19	parallel-tfidf-search	laya-delegate	aUrbH2k	0.6799	1.0	1	1	316
+2026-10-19	parallel-tfidf-search	laya-delegate	gUmPS9L	0.6217	1.0	1	1	233
+2026-10-19	parallel-tfidf-search	laya-delegate	tqZcMW2	1.0121	1.0	1	1	182
+2026-10-19	fix-visual-stability	OFF	ASke3DW	0.4423	0.0	0	0	0
+2026-10-19	fix-visual-stability	OFF	DdGzY6L	0.5447	0.0	0	0	0
+2026-10-19	fix-visual-stability	OFF	MhwGkUt	0.5933	1.0	0	0	0
+2026-10-19	fix-visual-stability	OFF	x3uD8r2	0.5824	0.0	0	0	0
+2026-10-19	fix-visual-stability	laya-delegate	CwSaJ8Z	0.4013	0.0	0	0	439
+2026-10-19	fix-visual-stability	laya-delegate	D2gBcuD	0.5090	0.0	0	0	627
+2026-10-19	fix-visual-stability	laya-delegate	gDwk4jn	0.3986	0.0	0	0	154
+2026-10-19	fix-visual-stability	laya-delegate	t37w2W4	0.4723	0.0	0	0	586
+2026-10-19	debug-trl-grpo	OFF	6pREc4d	0.2024	0.6	0	0	0
+2026-10-19	debug-trl-grpo	OFF	No593y7	0.2589	0.6	0	0	0
+2026-10-19	debug-trl-grpo	OFF	UTjBUhP	0.1725	0.6	0	0	0
+2026-10-19	debug-trl-grpo	OFF	jG5K6RY	0.3599	0.6	0	0	0
+2026-10-19	debug-trl-grpo	laya-delegate	D69N63Y	0.1452	0.6	0	0	0
+2026-10-19	debug-trl-grpo	laya-delegate	U5p2jwV	0.6721	0.6	0	0	5000
+2026-10-19	debug-trl-grpo	laya-delegate	XNAMu9y	0.2437	0.6	0	0	6600
+2026-10-19	debug-trl-grpo	laya-delegate	ZDYjSDv	0.6412	0.6	0	0	6200
+2026-10-19	fix-build-google-auto	OFF	8MxdE6v	0.3083	1.0	0	0	0
+2026-10-19	fix-build-google-auto	OFF	jPbtGxm	0.3561	1.0	0	0	0
+2026-10-19	fix-build-google-auto	OFF	kGen9Vj	0.2666	1.0	0	0	0
+2026-10-19	fix-build-google-auto	OFF	sfpKFm9	0.3617	1.0	0	0	0
+2026-10-19	fix-build-google-auto	laya-delegate	3XXDHqy	0.1610	1.0	1	1	4000
+2026-10-19	fix-build-google-auto	laya-delegate	KwDmzGB	0.2862	1.0	0	0	473
+2026-10-19	fix-build-google-auto	laya-delegate	vqPeDbt	0.2822	1.0	1	1	4000
+2026-10-19	fix-build-google-auto	laya-delegate	y5joJz4	0.3754	1.0	1	1	6900
+2026-10-19	fix-erlang-ssh-cve	OFF	KXZLJEP	0.1772	1.0	0	0	0
+2026-10-19	fix-erlang-ssh-cve	OFF	eu6HbQJ	0.2749	1.0	0	0	0
+2026-10-19	fix-erlang-ssh-cve	OFF	feac8M4	0.1982	1.0	0	0	0
+2026-10-19	fix-erlang-ssh-cve	OFF	s964Son	0.1826	1.0	0	0	0
+2026-10-19	fix-erlang-ssh-cve	laya-delegate	6tqTukT	0.1506	1.0	0	0	0
+2026-10-19	fix-erlang-ssh-cve	laya-delegate	Gbm9zy9	0.2297	1.0	0	0	216
+2026-10-19	fix-erlang-ssh-cve	laya-delegate	SDXESgb	0.1797	1.0	0	0	935
+2026-10-19	fix-erlang-ssh-cve	laya-delegate	mFqDiU4	0.1716	1.0	0	0	398
+2026-10-19	python-scala-translation	OFF	C5sTJX8	1.3798	1.0	0	0	0
+2026-10-19	python-scala-translation	OFF	Ff4LNT5	1.0214	1.0	0	0	0
+2026-10-19	python-scala-translation	OFF	VEDkbh7	1.0255	1.0	0	0	0
+2026-10-19	python-scala-translation	OFF	arnbz7m	0.7875	1.0	0	0	0
+2026-10-19	python-scala-translation	laya-delegate	NL3tesa	0.7774	1.0	1	1	82
+2026-10-19	python-scala-translation	laya-delegate	Y83UJLX	0.6692	1.0	1	2	243
+2026-10-19	python-scala-translation	laya-delegate	seQU3Kz	1.0669	1.0	1	1	7100
+2026-10-19	python-scala-translation	laya-delegate	unXCx6U	0.8793	1.0	1	2	6800
