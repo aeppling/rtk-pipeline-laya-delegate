@@ -151,6 +151,6 @@ mode    = "suggest"
 message = "Do not run this search or open these files yourself: hand the investigation to the Explore sub-agent (Agent tool: subagent_type \"Explore\", model \"haiku\") with one precise question, and ask it for file paths, line numbers and the exact lines you will need. Then work from its report."
 ```
 
-Measured by [rtk](https://github.com/rtk-ai/rtk) v0.49.0 on 2026-10-19.
+Measured by [rtk](https://github.com/rtk-ai/rtk) v1.0.1 on 2026-10-19.
 
 Install this pipeline: `rtk pipeline add <url-of-this-card>`
