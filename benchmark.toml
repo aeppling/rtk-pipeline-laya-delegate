@@ -1,0 +1,67 @@
+# benchmark.toml — numbers published by the pipeline author.
+# The marketplace shows them as "author's benchmark"; the bot checks the shape only.
+schema_version = 1
+
+[benchmark]
+suite          = "SkillsBench"
+agent          = "Claude Code"
+model          = "claude-opus-5-5"
+baseline       = "stock Claude Code"
+trials_per_arm = 48
+dates          = ["2026-10-18", "2026-10-19"]
+details        = "RESULTS.md"
+raw            = "results.tsv"
+notes          = "Both arms of each day ran in the same batch. Four trials per arm per day, so a per-task difference under about 20% is within noise; the two-day total is the number to quote. debug-trl-grpo is a bug task the pipeline does not route; its extra cost is the agent's own path."
+
+[benchmark.cost]
+# mean cost per trial, USD, summed over the 6 tasks
+baseline = 3.587
+pipeline = 3.088
+per      = "trial"
+
+[benchmark.quality]
+metric   = "reward"
+baseline = 0.81
+pipeline = 0.81
+
+[[benchmark.task]]
+name = "parallel-tfidf-search"
+baseline = 1.345
+pipeline = 0.946
+quality_baseline = 1.00
+quality_pipeline = 1.00
+
+[[benchmark.task]]
+name = "python-scala-translation"
+baseline = 1.002
+pipeline = 0.867
+quality_baseline = 1.00
+quality_pipeline = 1.00
+
+[[benchmark.task]]
+name = "fix-visual-stability"
+baseline = 0.538
+pipeline = 0.448
+quality_baseline = 0.25
+quality_pipeline = 0.25
+
+[[benchmark.task]]
+name = "fix-build-google-auto"
+baseline = 0.319
+pipeline = 0.303
+quality_baseline = 1.00
+quality_pipeline = 1.00
+
+[[benchmark.task]]
+name = "fix-erlang-ssh-cve"
+baseline = 0.198
+pipeline = 0.191
+quality_baseline = 1.00
+quality_pipeline = 1.00
+
+[[benchmark.task]]
+name = "debug-trl-grpo"
+baseline = 0.185
+pipeline = 0.333
+quality_baseline = 0.60
+quality_pipeline = 0.60
