@@ -33,11 +33,13 @@ _No recorded activity yet — run some sessions with this pipeline active, then 
 # Code): -30% cost on parallel-tfidf-search, -19.5% on the full suite in one
 # day, -13.9% over both days, reward unchanged.
 #
-# PREREQUISITE: Laya running locally. The routing decisions come from Laya
-# (@receptron/laya, a small local classifier; Node 20+, ~1.7 GB model download
-# on first start), served at http://127.0.0.1:41733/v1/systemone (rtk's
-# classifier wire format), with RTK_LAYA_TOKEN exported. Without it, every
-# Laya-gated rule stays silent and only RTK's output filtering applies.
+# NEEDS: Laya on this computer, declared below as [dependency.laya]. The
+# routing decisions come from Laya (@receptron/laya, a small local classifier;
+# Node 20+, ~1.7 GB model download on first start). rtk asks before installing
+# it, checks the package's sha512, serves it on 127.0.0.1:41733 and starts it
+# again when a tool call finds it stopped; no key is needed. Older rtk releases
+# without pipeline dependencies refuse this file (E001 unknown section). Without
+# Laya, every Laya-gated rule stays silent and only RTK's output filtering applies.
 #
 # What it does
 # - Laya labels the task: bug / setup / write / data.
@@ -71,13 +73,14 @@ schema_version = 1
 
 [pipeline]
 name    = "laya-delegate"
+rtk_min = "1.3.0"
 extends = ["rtk:posthook", "rtk:delegate-reads"]
 
 [upstream.judge]
 provider     = "laya"
 model        = "laya"
 base_url     = "http://127.0.0.1:41733/v1/systemone"
-api_key_env  = "RTK_LAYA_TOKEN"
+dependency   = "laya"
 timeout_secs = 60
 
 [upstream.haiku]
@@ -149,6 +152,112 @@ action  = "route"
 task    = "bulk-read"
 mode    = "suggest"
 message = "Do not run this search or open these files yourself: hand the investigation to the Explore sub-agent (Agent tool: subagent_type \"Explore\", model \"haiku\") with one precise question, and ask it for file paths, line numbers and the exact lines you will need. Then work from its report."
+
+# Laya runs on this computer, installed only after you say yes. rtk checks
+# the package's sha512 before anything runs, serves it on 127.0.0.1:41733
+# with the server below, and it exits after 30 idle minutes.
+[dependency.laya]
+about     = "Laya, an open-source decision model the judge asks"
+needs     = "Node.js 20+, ~1.7 GB of model weights downloaded on first start (kept in ~/.cache/receptron-laya), ~2 GB of RAM while running"
+npm       = "@receptron/laya@0.2.0"
+integrity = "sha512-C7eBcUUj/S4Mn2ccQoqflZghEi9OPu6RBUbSjcbnuPbQQAWTVFGxDRoLyyP59hm2t4oF8JbE+dP0IaUE58XsJQ=="
+node      = 20
+run       = ["node", "server.mjs"]
+listen    = "127.0.0.1:41733"
+health    = "/health"
+env       = { LAYA_PORT = "41733", LAYA_IDLE_SECS = "1800", ONNXRUNTIME_NODE_INSTALL = "skip" }
+
+[dependency.laya.files]
+"server.mjs" = '''
+import { createServer } from "node:http";
+import { Laya } from "@receptron/laya";
+
+const PORT = Number(process.env.LAYA_PORT ?? 41733);
+const HOST = process.env.LAYA_HOST ?? "127.0.0.1";
+const IDLE_SECS = Number(process.env.LAYA_IDLE_SECS ?? 1800);
+const state = { phase: "loading", file: "", received: 0, total: 0 };
+let laya = null;
+let lastUse = Date.now();
+let logged = { file: "", pct: -10 };
+
+const server = createServer((req, res) => {
+  if (req.method === "GET" && req.url === "/health") {
+    if (laya) return res.end("ok");
+    const pct = state.total ? Math.floor((state.received / state.total) * 100) : 0;
+    res.statusCode = 503;
+    return res.end(state.phase === "downloading" ? `downloading ${state.file} ${pct}%` : "loading the model");
+  }
+  if (req.method !== "POST" || !req.url.startsWith("/v1/systemone")) {
+    res.statusCode = 404;
+    return res.end();
+  }
+  if (!laya) {
+    res.statusCode = 503;
+    return res.end(JSON.stringify({ error: "loading" }));
+  }
+  lastUse = Date.now();
+  let body = "";
+  req.setEncoding("utf8");
+  req.on("data", (c) => { body += c; if (body.length > 1_000_000) req.destroy(); });
+  req.on("end", async () => {
+    try {
+      const { state: input, questions } = JSON.parse(body);
+      const t0 = Date.now();
+      const result = await laya.systemOne(input ?? "", questions ?? {});
+      const answers = {};
+      for (const [name, a] of Object.entries(result.answers)) {
+        if (a.type === "score") {
+          const levels = Object.keys(a.probabilities ?? {}).length;
+          answers[name] = { ...a, score: levels > 1 ? a.score / (levels - 1) : a.score };
+        } else answers[name] = a;
+      }
+      console.log(`laya: verdict ${Date.now() - t0}ms chars=${(input ?? "").length}`);
+      res.setHeader("content-type", "application/json");
+      res.end(JSON.stringify({ model: result.model, answers, usage: result.usage }));
+    } catch (e) {
+      console.error("laya: request failed", e);
+      res.statusCode = 400;
+      res.end(JSON.stringify({ error: "Bad request" }));
+    }
+  });
+});
+server.on("error", (e) => {
+  console.error(`laya: cannot listen on ${HOST}:${PORT}: ${e.message}`);
+  process.exit(1);
+});
+server.listen(PORT, HOST, () => console.log(`laya: listening on ${HOST}:${PORT}/v1/systemone`));
+
+try {
+  laya = await Laya.load({
+    onProgress: ({ file, received, total }) => {
+      state.phase = "downloading";
+      state.file = file;
+      state.received = received;
+      state.total = total;
+      const pct = total ? Math.floor((received / total) * 100) : 0;
+      if (file !== logged.file || pct >= logged.pct + 10) {
+        logged = { file, pct };
+        console.log(`laya: downloading ${file} ${pct}%`);
+      }
+    },
+  });
+} catch (e) {
+  console.error("laya: model failed to load", e);
+  process.exit(1);
+}
+state.phase = "ready";
+lastUse = Date.now();
+console.log("laya: model warm");
+
+if (IDLE_SECS > 0) {
+  setInterval(() => {
+    if (Date.now() - lastUse > IDLE_SECS * 1000) {
+      console.log(`laya: idle ${IDLE_SECS}s, exiting`);
+      process.exit(0);
+    }
+  }, 60000).unref();
+}
+'''
 ```
 
 Measured by [rtk](https://github.com/rtk-ai/rtk) v1.0.1 on 2026-10-19.
