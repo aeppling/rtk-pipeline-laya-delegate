@@ -8,6 +8,8 @@ Numbers on this card are self-reported by the author's own rtk. rtk verifies not
 rtk pipeline add github:aeppling/rtk-pipeline-laya-delegate
 ```
 
+Laya, the AI model this pipeline asks before routing a call, runs on your computer: it needs a computer with a good GPU, and slower machines will struggle to run it.
+
 rtk shows this pipeline's rules and asks before anything installs, and pins the install to a commit. A pipeline can rewrite the commands your agent runs, filter and replace what it reads, and send content to any upstream it declares — review the rules and install only what you trust. RTK does not review or endorse shared pipelines; the author is responsible for this repo, and you are responsible for what you install.
 
 ## What it does
@@ -74,6 +76,7 @@ schema_version = 1
 [pipeline]
 name    = "laya-delegate"
 rtk_min = "1.3.0"
+note    = "local AI model: needs a good GPU"
 extends = ["rtk:posthook", "rtk:delegate-reads"]
 
 [upstream.judge]
@@ -158,7 +161,7 @@ message = "Do not run this search or open these files yourself: hand the investi
 # with the server below, and it exits after 30 idle minutes.
 [dependency.laya]
 about     = "Laya, an open-source decision model the judge asks"
-needs     = "Node.js 20+, ~1.7 GB of model weights downloaded on first start (kept in ~/.cache/receptron-laya), ~2 GB of RAM while running"
+needs     = "a computer with a good GPU (it runs an AI model locally; slower machines will struggle), Node.js 20+, ~1.7 GB of model weights downloaded on first start (kept in ~/.cache/receptron-laya), ~2 GB of RAM while running"
 npm       = "@receptron/laya@0.2.0"
 integrity = "sha512-C7eBcUUj/S4Mn2ccQoqflZghEi9OPu6RBUbSjcbnuPbQQAWTVFGxDRoLyyP59hm2t4oF8JbE+dP0IaUE58XsJQ=="
 node      = 20

@@ -45,6 +45,7 @@ schema_version = 1
 [pipeline]
 name    = "laya-delegate"
 rtk_min = "1.3.0"
+note    = "local AI model: needs a good GPU"
 extends = ["rtk:posthook", "rtk:delegate-reads"]
 
 [upstream.judge]
@@ -129,7 +130,7 @@ message = "Do not run this search or open these files yourself: hand the investi
 # with the server below, and it exits after 30 idle minutes.
 [dependency.laya]
 about     = "Laya, an open-source decision model the judge asks"
-needs     = "Node.js 20+, ~1.7 GB of model weights downloaded on first start (kept in ~/.cache/receptron-laya), ~2 GB of RAM while running"
+needs     = "a computer with a good GPU (it runs an AI model locally; slower machines will struggle), Node.js 20+, ~1.7 GB of model weights downloaded on first start (kept in ~/.cache/receptron-laya), ~2 GB of RAM while running"
 npm       = "@receptron/laya@0.2.0"
 integrity = "sha512-C7eBcUUj/S4Mn2ccQoqflZghEi9OPu6RBUbSjcbnuPbQQAWTVFGxDRoLyyP59hm2t4oF8JbE+dP0IaUE58XsJQ=="
 node      = 20
